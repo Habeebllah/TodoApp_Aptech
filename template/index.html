@@ -1,4 +1,7 @@
 {% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,15 +21,16 @@
 
   <div class="container box mt-5">
     <div class="row g-3 align-items-center ">
-        <form action="" class="d-flex align-items-center">
+        <form action="" class="d-flex align-items-center" method="post" novalidate>
+          {% csrf_token %}
             <div class="col-auto d-flex">
-                <label class="col-form-label pe-3">Item:</label>
-                <input type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                {{form.item|add_class:"form-control pe-3"|as_crispy_field}}
+                <!-- <input type="text" id="inputPassword6" class="" aria-describedby="passwordHelpInline"> -->
               </div>
       
               <div class="col-auto d-flex ps-5">
-                  <label class="col-form-label pe-3 ">Status:</label>
-                  <input type="text" class="form-control" aria-describedby="passwordHelpInline">
+                  {{form.status|add_class:"form-control pe-3"|as_crispy_field}}
+                  <!-- <input type="text" class="form-control" aria-describedby="passwordHelpInline"> -->
             </div>
       
             <div class="col-auto ps-5">
@@ -35,31 +39,19 @@
         </form>
     </div>
 
+  
+
     <ol class="list-group list-group-numbered mt-5">
+      {% for i in items %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
           <div class="ms-2 me-auto">
-            <div class="fw-bold">Subheading</div>
-            Content for list item
+            <div class="fw-bold">{{i.item}}</div>
+            {{i.status}}
           </div>
-          <span class="badge bg-danger rounded-pill me-2">Delete</span>
+          <span class="badge bg-danger rounded-pill me-2"><a href="{% url 'delete_item' i.id %}">Delete</a></span>
           <span class="badge bg-primary rounded-pill">Update</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Subheading</div>
-              Content for list item
-            </div>
-            <span class="badge bg-danger rounded-pill me-2">Delete</span>
-            <span class="badge bg-primary rounded-pill">Update</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="ms-2 me-auto">
-              <div class="fw-bold">Subheading</div>
-              Content for list item
-            </div>
-            <span class="badge bg-danger rounded-pill me-2">Delete</span>
-            <span class="badge bg-primary rounded-pill">Update</span>
-          </li> 
+      {% endfor %}
        
       </ol>
   </div>
