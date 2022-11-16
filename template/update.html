@@ -27,12 +27,12 @@
       <form action="" class="d-flex align-items-center" method="post" novalidate>
         {% csrf_token %}
         <div class="col-auto d-flex">
-          {{form.item|add_class:"form-control pe-3"|attr:"placeholder: Enter Item"|as_crispy_field}}
+          {{form.item|add_class:"form-control pe-3"|attr:"placeholder: Enter Item"}}
           <!-- <input type="text" id="inputPassword6" class="" aria-describedby="passwordHelpInline"> -->
         </div>
 
         <div class="col-auto d-flex ps-5">
-          {{form.status|add_class:"form-control pe-3"|as_crispy_field}}
+          {{form.status|add_class:"form-control pe-3"}}
           <!-- <input type="text" class="form-control" aria-describedby="passwordHelpInline"> -->
         </div>
 
@@ -42,45 +42,6 @@
         </div>
       </form>
     </div>
-
-
-
-    <ol class="list-group list-group-numbered mt-5">
-      {% for i in items %}
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">{{i.item}}</div>
-          {{i.status}}
-        </div>
-        <!-- Button trigger modal -->
-
-
-        <span class="badge bg-danger rounded-pill me-2" data-bs-toggle="modal"
-          data-bs-target="#exampleModal">Delete</span>
-        <span class="badge bg-primary rounded-pill"><a href="{% url 'update_item' i.id %}">Update</a></span>
-      </li>
-
-      <!-- Delete Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure you want to delete?</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-danger"><a href="{% url 'delete_item' i.id %}">Delete</a></button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-
-      {% endfor %}
-
-    </ol>
   </div>
 
 

@@ -24,6 +24,22 @@ def DeleteItem(request, id):
     item.delete()
     return redirect("/")
 
+
+def UpdateItem(request, id):
+    template_name = 'update.html'
+    item = Todo.objects.get(id = id)
+    form = TodoForm(instance=item)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect("/")
+    context = {
+        'form': form
+    }
+    return render(request, template_name, context)
+
+
 def Contact(request):
     template_name = 'contact.html'
     return render(request, template_name)
